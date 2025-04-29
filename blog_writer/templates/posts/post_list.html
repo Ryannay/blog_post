@@ -2,15 +2,16 @@
 <!-- templates/index.html -->
 
 <html>
+    <link rel="stylesheet" href="{% static 'post/style.css' %}">
 <head>
     <title>Ryan's Blog</title>
-    <link rel="stylesheet" href="{% static 'post/style.css' %}">
+    
 </head>
 <body>
 
     <!-- Add a NAVBAR -->
     <div class="navbar">
-        <div>📝 Ryan's Blog</div>
+        <div>📝 Ryan's Rice Hub</div>
         <div>
             <a href="/">Home</a>
             <a href="#">About</a>
@@ -20,17 +21,59 @@
 
     <h1>Welcome to My Blog</h1>
 
-    <div id="posts">
-        {% for post in posts %}
-            <div class="post fade-in">
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.content }}</p>
-                <small>Published: {{ post.created_at }}</small>
+    <div class="tab-container">
+        <div class="tab-switch">
+            <button class="tab-btn active" onclick="switchTab('comments')">Timely Comment</button>
+            <button class="tab-btn" onclick="switchTab('blogs')">Long Blogs</button>
+        </div>
+    
+        <!-- Timely Comments -->
+        <div id="comments" class="tab-content active">
+            {% for comment in comments %}
+            <div class="comment-entry">
+                <strong>Admin &gt;</strong> {{ comment.content }}
+                <div class="timestamp">{{ comment.timestamp }}</div>
             </div>
-        {% empty %}
-            <p>No posts yet!</p>
-        {% endfor %}
+            {% empty %}
+            <div class="no-posts">No comments yet.</div>
+            {% endfor %}
+        </div>
+    
+        <!-- Long Blogs -->
+        <div id="blogs" class="tab-content">
+            {% for blog in blogs %}
+            <div class="blog-preview" onclick="expandBlog(this)">
+                <div class="blog-header">
+                    <h3 class="blog-title">{{ blog.title }}</h3>
+                    <p class="blog-desc">{{ blog.description }}</p>
+                    <small class="reading-time">Reading time: {{ blog.reading_time }} mins</small>
+                </div>
+                <div class="blog-content">
+                    <p>{{ blog.content }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-posts">No blogs uploaded yet.</div>
+            {% endfor %}
+        </div>
     </div>
 
 </body>
+
+<script>
+    function switchTab(tabId) {
+        const tabs = document.querySelectorAll('.tab-content');
+        const buttons = document.querySelectorAll('.tab-btn');
+    
+        tabs.forEach(tab => tab.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+    
+        document.getElementById(tabId).classList.add('active');
+        document.querySelector(`.tab-btn[onclick*="${tabId}"]`).classList.add('active');
+    }
+    
+    function expandBlog(element) {
+        element.classList.toggle('expanded');
+    }
+</script>
 </html>

@@ -1,9 +1,9 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #aebeca;
+    background-color: #273540;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #e1e1e1;
     line-height: 1.6;
 }
 
@@ -16,7 +16,7 @@ header {
 
 h1 {
     text-align: center;
-    color: #4bd39f;
+    color: #ffffff;
     margin: 20px 0;
     font-weight: 700;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
@@ -52,12 +52,12 @@ h1 {
 }
 
 .post p {
-    color: #4a5568;
+    color: #d8d8d8;
     font-size: 16px;
 }
 
 small {
-    color: #718096;
+    color: #a3a3a3;
     display: block;
     margin-top: 15px;
     font-style: italic;
@@ -127,7 +127,7 @@ small {
 .no-posts {
     text-align: center;
     padding: 40px;
-    color: #718096;
+    color: #d4d4d4;
     font-style: italic;
     background: white;
     border-radius: 10px;
@@ -160,4 +160,111 @@ small {
     .navbar a {
         margin: 0 10px;
     }
+}
+
+.tab-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.tab-switch {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #2f3e4c;
+    color: #ffd700;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 0 5px;
+    border-radius: 10px;
+}
+
+.tab-btn:hover {
+    background-color: #404f5f;
+    transform: scale(1.05);
+}
+
+.tab-btn.active {
+    background-color: #e6b800;
+    color: black;
+    transform: scale(1.1);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.comment-entry {
+    text-align: center;
+    background-color: #1e2a33;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.comment-entry .timestamp {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #aaa;
+    font-style: italic;
+}
+
+.blog-preview {
+    background-color: white;
+    color: black;
+    border-left: 4px dashed #e66006;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-header {
+    transition: opacity 0.3s ease;
+}
+
+.blog-title {
+    color: #e66006;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.blog-title:hover {
+    color: #a34200;
+    text-decoration: underline;
+}
+
+.blog-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.blog-preview.expanded .blog-header {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.blog-preview.expanded .blog-content {
+    max-height: 500px;
+    opacity: 1;
 }

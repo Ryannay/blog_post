@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-e)4r$3$h1k!sn282rsh@-@8+erqdl@zt8bnjtdv7j3z=-ocsl#
 DEBUG = True
 
 ALLOWED_HOSTS = ['blog_writer.onrender.com',
-                 'blog-post-ti1l.onrender.com']
+                 'blog-post-ti1l.onrender.com',
+                 '127.0.0.1',
+                 'localhost',
+]
 
 
 # Application definition

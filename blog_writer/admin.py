@@ -1,6 +1,14 @@
-from django.shortcuts import render
-from .models import Post
+from django.contrib import admin
+from .models import Blog, Comment
 
-def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_date', 'reading_time')
+    search_fields = ('title', 'description')
+    list_filter = ('created_date',)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'timestamp', 'content')
+    search_fields = ('content',)
+    list_filter = ('timestamp',)

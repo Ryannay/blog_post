@@ -79,7 +79,7 @@
             {% for comment in comments %}
             <div class="comment-entry">
                 <strong>Admin &gt;</strong> {{ comment.content }}
-                <div class="timestamp">{{ comment.timestamp }}</div>
+                <div class="timestamp">{{ comment.timestamp|date:"F j, Y, g:i a" }} ET</div>
             </div>
             {% empty %}
             <div class="no-posts">No comments yet.</div>
@@ -104,6 +104,11 @@
             {% endfor %}
         </div>
     </div>
+
+    
+    <footer class="site-footer">
+        <p>© Ryan Zhao | ryannayr.zhao@mail.utoronto.ca | ryannay.github.io</p>
+    </footer>
 
     <script>
         function switchTab(tabId) {

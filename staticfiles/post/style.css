@@ -428,3 +428,23 @@ small {
 body.admin-panel-open {
     overflow: hidden;
 }
+
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #1e2a33;
+    color: #a0a0a0;
+    font-size: 0.4em;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 100;
+}
+
+.site-footer p {
+    margin: 0;
+    line-height: 1.5;
+}

@@ -125,15 +125,23 @@ small {
 .rice-word {
     display: inline-block;
     transition: all 0.3s ease;
-}
-
-#site-title:hover .rice-word::after {
-    content: "🍚";
-    transition: opacity 0.3s ease;
+    position: relative;
 }
 
 #site-title:hover .rice-word {
-    color: transparent;
+    opacity: 0;
+}
+
+#site-title .rice-word::after {
+    content: "🍚";
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+#site-title:hover .rice-word::after {
+    opacity: 1;
 }
 
 @keyframes fadeIn {

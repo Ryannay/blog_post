@@ -77,6 +77,97 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+## Docker Support
+
+### Development Environment
+1. Build the development image:
+```bash
+docker build -t ryans-rice-hub-dev .
+```
+
+2. Run the development container:
+```bash
+docker run -p 8000:8000 -v $(pwd):/app ryans-rice-hub-dev
+```
+
+### Production Environment
+1. Build the production image:
+```bash
+docker build -t ryans-rice-hub-prod -f Dockerfile.prod .
+```
+
+2. Run with Docker Compose:
+```bash
+docker-compose up -d
+```
+
+### Docker Configuration Files
+
+#### Dockerfile (Development)
+```dockerfile
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+#### Dockerfile.prod (Production)
+```dockerfile
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+RUN python manage.py collectstatic --noinput
+
+EXPOSE 8000
+
+CMD ["gunicorn", "myblog.wsgi:application", "--bind", "0.0.0.0:8000"]
+```
+
+#### docker-compose.yml
+```yaml
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=0
+      - SECRET_KEY=your-secret-key
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+
+volumes:
+  static_volume:
+  media_volume:
+```
+
+### Docker Benefits
+- **Consistent Environment**: Same development and production environments
+- **Easy Deployment**: Simple commands to build and run
+- **Isolation**: Dependencies and configurations are contained
+- **Scalability**: Easy to scale with Docker Compose
+- **Version Control**: Track environment changes with Dockerfiles
+
 ## Admin Access
 - Access the admin panel through the "Admin" button
 - Requires staff privileges
